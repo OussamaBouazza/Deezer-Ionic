@@ -18,6 +18,7 @@ export class HomePage {
   constructor(private deezerService:DeezerService, public router:Router) {
   }
 
+  //récupérer les artistes de la recherche
    async onSearchArtist(event:any){
     let val = event.target.value;
     const search:DataSearchArtist  = await this.deezerService.getArtists(val);

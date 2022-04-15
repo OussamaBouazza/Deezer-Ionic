@@ -10,6 +10,9 @@ import {DataSearchTrackList, Track} from "../data/DataSearchTrackList";
 })
 export class ListTrackPage implements OnInit {
   albumID: string;
+  albumTitle: string;
+  albumCover:string;
+
   trackList: Track[] = [];
   audio:HTMLAudioElement;
   actualSong:string;      //chanson qui est en lecture
@@ -18,14 +21,19 @@ export class ListTrackPage implements OnInit {
 
 //lance une requête vers deezer pour récupérer la tracklist de l'album
   async ngOnInit() {
-    this.albumID = this.route.snapshot.paramMap.get('AlbumID');
+    this.route.queryParams.subscribe(param =>{
+      this.albumID = param["albumID"];
+      this.albumTitle = param["albumTitle"];
+      this.albumCover = param["albumCover"];
+    })
+
     this.audio = new Audio()
 
     const searchTrack:DataSearchTrackList = await this.deezerService.getTrackList(this.albumID);
     this.trackList = searchTrack.tracks.data;
   }
 
-//gère le lecteur audio
+  //gère le lecteur audio
   playSong(track:Track){
     //met en pause si le clip audio est en lecture ou qu'il y a une autre chanson en lecture
     if (this.actualSong == track.preview && !this.audio.paused){
@@ -39,10 +47,7 @@ export class ListTrackPage implements OnInit {
       this.audio.load();
       this.audio.play();
       this.actualSong = track.preview;
-
     }
-
-
   }
 
 }

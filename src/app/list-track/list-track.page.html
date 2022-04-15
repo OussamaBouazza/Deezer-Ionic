@@ -1,15 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ListTrack</ion-title>
-    <ion-toolbar>
-      <ion-button slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-button>
-    </ion-toolbar>
+    <ion-title>{{albumTitle}}</ion-title>
+    <ion-button slot="start" (click)="audio.pause()">
+      <ion-back-button></ion-back-button>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-img src="{{albumCover}}"></ion-img>
+      <ion-card-title>{{albumTitle}}</ion-card-title>
+      <ion-card-subtitle>{{trackList.length}} chansons</ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+
   <ion-list >
     <ion-card *ngFor="let track of trackList" >
       <ion-card-content>
@@ -19,15 +25,9 @@
               <h2>{{track.title}}</h2>
             </ion-col>
 
-<!--            <ion-col (click)="playSong(track)" style="border: solid; text-align: center">-->
-<!--              <ion-icon name="play" ></ion-icon>-->
-<!--            </ion-col>-->
-
             <ion-col (click)="playSong(track)" style="text-align: center">
               <ion-icon name="play"></ion-icon>
-<!--              <ion-icon [name]="isPlaying ? 'pause' : 'play'" ></ion-icon>-->
             </ion-col>
-
 
           </ion-row>
         </ion-grid>

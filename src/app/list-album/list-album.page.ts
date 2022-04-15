@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DeezerService} from "../service/deezer.service";
 import {DataSearchAlbum} from "../data/DataSearchAlbum";
 import {Albums} from "../data/Album";
-import {Artist} from "../data/Artist";
+
 
 @Component({
   selector: 'app-list-album',
@@ -33,7 +33,11 @@ export class ListAlbumPage implements OnInit {
 
   // envoyer l'id de l'album sélectionné vers list-track
   onClickAlbum(album:Albums){
-    this.router.navigate(['list-track/' + album.id])
+    this.router.navigate(['list-track'], {queryParams : {
+      albumID : album.id,
+      albumTitle : album.title,
+      albumCover : album.cover_medium
+    }});
   }
 
 

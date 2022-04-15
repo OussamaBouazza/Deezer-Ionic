@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./list-album/list-album.module').then( m => m.ListAlbumPageModule)
   },
   {
-    path: 'list-track/:AlbumID',
+    path: 'list-track',
     loadChildren: () => import('./list-track/list-track.module').then( m => m.ListTrackPageModule)
   },
 
